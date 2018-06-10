@@ -3,23 +3,31 @@
     // Al passaggio del mouse vengono visualizzate le descrizioni degli attributi esistenti.
     // Per ulteriori informazioni, visitare: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
+    "compounds": [
+        {
+            "name": "Node+Browser",
+            "configurations": ["Node","Chrome"]
+        }
+    ],
     "configurations": [
+
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}/app.js"
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Avvia programma",
+            "name": "Node",
             "program": "${workspaceFolder}\\bin\\www",
             "env": 
                 {
                     "DEBUG": "progetto-web-unimi:*"
                 }
             
+        },
+        {
+            "name": "Chrome",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:3000", 
+            "webRoot": "${workspaceFolder}/bin/www"
         }
     ]
 }
