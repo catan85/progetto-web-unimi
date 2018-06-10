@@ -1,0 +1,11 @@
+
+- per aggiornare l'app su heroku basta fare il push al suo remoto
+- per vedere il log dell'applicazione lanciare 
+    heroku logs --tail -a progetto-web-unimi
+
+
+- per vedere le release pushate: 
+    heroku releases -a progetto-web-unimi
+
+- per spostarsi su un altra release
+    heroku rollback v3 -a progetto-web-unimi
