@@ -3,8 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
 var indexRouter = require('./routes/index');
 var chartsRouter = require('./routes/charts');
+var authRouter = require('./routes/auth');
 
 var passport = require('./model/passport');
 
@@ -49,6 +51,7 @@ app.use(passport.session());
 // contenuta nel router
 app.use('/', indexRouter);
 app.use('/', chartsRouter);
+app.use('/', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

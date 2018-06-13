@@ -1,11 +1,34 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>This is the main container</h1>
-    {{{body}}}
-  </body>
+<head>
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  
+</head>
+<body>
+  <div>
+  <div>
+  <nav class="navbar navbar-inverse" role="navigation" style="padding-left:130px;">
+         <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/charts">Charts</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+  </nav>
+  </div> 
+  
+  <p>{{{body}}}</p>
+
+    <div class="jumbotron">
+    <p>
+      Put the contact details here!
+    </p>
+    </div>
+  </div>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</body>
 </html>
