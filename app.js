@@ -6,8 +6,10 @@ var logger = require('morgan');
 
 
 var authRouter = require('./routes/auth');
+var indexRouter = require('./routes/index')
 var passport = require('./model/passport');
 var app = express();
+
 
 // imposta il path delle view e definisce come motore delle view handlebars
 app.set('views', path.join(__dirname, 'views'));
@@ -47,6 +49,7 @@ app.use(passport.session());
 // nel caso voglia concatenare una sottocartella prima di raggiungere la route 
 // contenuta nel router
 app.use('/', authRouter);
+app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
