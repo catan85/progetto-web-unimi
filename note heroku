@@ -9,3 +9,7 @@
 
 - per spostarsi su un altra release
     heroku rollback v3 -a progetto-web-unimi
+
+
+- applicazione visibile al sito:
+    https://progetto-web-unimi.herokuapp.com/
