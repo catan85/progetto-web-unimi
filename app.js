@@ -4,12 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var chartsRouter = require('./routes/charts');
+
 var authRouter = require('./routes/auth');
-
 var passport = require('./model/passport');
-
 var app = express();
 
 // imposta il path delle view e definisce come motore delle view handlebars
@@ -49,8 +46,6 @@ app.use(passport.session());
 // assegna i moduli di routing all'app. lo slash serve a dare un path relativo
 // nel caso voglia concatenare una sottocartella prima di raggiungere la route 
 // contenuta nel router
-app.use('/', indexRouter);
-app.use('/', chartsRouter);
 app.use('/', authRouter);
 
 // catch 404 and forward to error handler

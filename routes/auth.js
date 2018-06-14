@@ -3,10 +3,11 @@ var router = express.Router();
 var passport = require('passport');
 
 // Pagina del login
+/*
 router.get('/login',
 function(req, res){
   res.render('login');
-});
+});*/
 
 // Metodo POST per il login (lanciato dal form della pagina login)
 router.post('/login', 
