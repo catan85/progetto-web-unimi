@@ -29,7 +29,7 @@
 					<article id="home" class="panel intro">
 					   <header>
 							{{#if user}}
-								<p>Hello, {{user.username}}</p>
+								<p>Hello, {{user.username}}!</p>
 							{{else}}
 								<p>Welcome! Please <a href="#login">log in</a>.</p>
 							{{/if}}
@@ -40,20 +40,14 @@
 						<header>
 							<p>Pagina: "{{title}}"</p>
 							<p>Questo è il contenuto di charts</p>
-							<p>Prova ad utilizzare queste librerie: <a href="https://gionkunz.github.io/chartist-js/index.html">Chartist.js</a></p>
-						</header>
-						<a href="#charts" class="jumplink pic">
-							<span class="arrow icon fa-chevron-right"><span>See my work</span></span>
-							<img src="images/me.jpg" alt="" />
-						</a>
+						</header>>
 						{{else}}
 							<p> Please <a href="#login">log in</a>.</p>
 						{{/if}}
 					  </article>
 
 					  <article id="login" class="panel">
-						  <p>This is the login page</p>
-							<form action="/login" method="post">
+						    <form action="/login" method="post">
 								<div>
 								<label>Username:</label>
 								<input type="text" name="username"/><br/>
@@ -78,12 +72,15 @@
 
 			</div>
 
+
+
 		<!-- Scripts -->
 			<script src="javascripts/jquery.min.js"></script>
 			<script src="javascripts/browser.min.js"></script>
 			<script src="javascripts/breakpoints.min.js"></script>
 			<script src="javascripts/util.js"></script>
 			<script src="javascripts/main.js"></script>
-
+			<script type="text/javascript" charset="utf-8" src="chart.min.js"></script>
+			
 	</body>
 </html>

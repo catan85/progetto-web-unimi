@@ -6,7 +6,7 @@ var logger = require('morgan');
 
 
 var authRouter = require('./routes/auth');
-var indexRouter = require('./routes/index')
+var mainRouter = require('./routes/main')
 var passport = require('./model/passport');
 var app = express();
 
@@ -49,7 +49,7 @@ app.use(passport.session());
 // nel caso voglia concatenare una sottocartella prima di raggiungere la route 
 // contenuta nel router
 app.use('/', authRouter);
-app.use('/', indexRouter);
+app.use('/', mainRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
