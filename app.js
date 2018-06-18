@@ -6,7 +6,8 @@ var logger = require('morgan');
 
 
 var authRouter = require('./routes/auth');
-var mainRouter = require('./routes/main')
+var mainRouter = require('./routes/main');
+var apiRouter = require('./routes/api');
 var passport = require('./model/passport');
 var app = express();
 
@@ -50,6 +51,10 @@ app.use(passport.session());
 // contenuta nel router
 app.use('/', authRouter);
 app.use('/', mainRouter);
+
+// il router delle api viene prefissato dalla dicitura api in modo da non confonderlo
+// con eventuali altre pagine dei charts (che al momento non esistono come view)
+app.use('/api',apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
