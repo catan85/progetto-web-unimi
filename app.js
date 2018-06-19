@@ -9,6 +9,10 @@ var authRouter = require('./routes/auth');
 var mainRouter = require('./routes/main');
 var apiRouter = require('./routes/api');
 var passport = require('./model/passport');
+
+// inizializzazione del modello delle misure
+var measures = require('./model/measures');
+
 var app = express();
 
 
