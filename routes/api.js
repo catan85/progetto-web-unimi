@@ -9,6 +9,8 @@ router.get('/charts',
   function(req, res){
    
     //// -------------------------------------
+    //    Ok funziona.. ma sarebbe meglio fare una connessione e sfruttare i modelli..
+    //// ---------------------------------------
     console.log("connecting..");
     
     var mongoose = require('mongoose');

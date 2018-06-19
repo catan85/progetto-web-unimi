@@ -12,6 +12,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="stylesheets/main.css" />
 		<noscript><link rel="stylesheet" href="stylesheets/noscript.css" /></noscript>
+
 	</head>
 	<body class="is-preload">
 
@@ -43,9 +44,30 @@
 							
 							<canvas id="line-chart" ></canvas>
 
-							
 							<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 							<script>
+								function createXMLHttpRequest() {
+									try {return new ActiveXObject("Msxml2.XMLHTTP");} catch (e) {}
+									try {return new ActiveXObject("Microsoft.XMLHTTP");} catch (e) {}
+									try {return new XMLHttpRequest(); } catch (e) {}
+									alert("XMLHttpRequest non supportato");
+									return null;
+								}
+								window.onload = function() {
+									var rq = createXMLHttpRequest();
+									rq.onreadystatechange = function(){
+										if (rq.readyState==4){
+											if(rq.status==200){ 
+												response = JSON.parse(rq.response);
+												console.dir(response);
+											}
+											else{alert("Errore di chiamata");}
+										}			
+									}
+									rq.open("GET", "api/charts", true); // apre la connessione 
+									rq.send();
+								}
+								
 								new Chart(document.getElementById("line-chart"), {
 								type: 'line',
 								data: {
@@ -85,6 +107,7 @@
 									}
 								}
 								});
+								
 							</script>
 						{{else}}
 							<p> Please <a href="#login">log in</a>.</p>
@@ -126,7 +149,7 @@
 			<script src="javascripts/breakpoints.min.js"></script>
 			<script src="javascripts/util.js"></script>
 			<script src="javascripts/main.js"></script>
-			<script type="text/javascript" charset="utf-8" src="chart.min.js"></script>
+			
 			
 	</body>
 </html>
