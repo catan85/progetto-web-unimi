@@ -55,77 +55,92 @@
 								}
 								window.onload = function() {
 									var rq = createXMLHttpRequest();
+
 									rq.onreadystatechange = function(){
 										if (rq.readyState==4){
 											if(rq.status==200){ 
-												response = JSON.parse(rq.response);
-												console.dir(response);
+												
+												var measures = JSON.parse(rq.response).reverse();
+												console.dir(measures);
 
 												// response è un array di 30 valori che
 												// deve poi essere passaro al chart
-												new Chart(document.getElementById("line-chart"), {
-												type: 'line',
-												data: {
-													labels: response.map(v => v.timestamp),
-													datasets: [{ 
-														data: response.map(v => v.torque),
-														label: "Torque",
-														borderColor: "#3e95cd",
-														fill: false,
-														yAxisID: 'ax1',
-													}, { 
-														data: response.map(v => v.speed),
-														label: "Speed",
-														borderColor: "#8e5ea2",
-														fill: false,
-														yAxisID: 'ax2',
-													}, { 
-														data: response.map(v => v.temperature),
-														label: "Temperature",
-														borderColor: "#3cba9f",
-														fill: false,
-														yAxisID: 'ax3',
-													}
-													]
-												},
-												options: {
-													title: {
-														display: true,
-														text: 'Measures'
-													},
-													scales: {
-														yAxes: 
-														[	{
-																id: 'ax1',
-																type: 'linear',
-																position: 'left',
-															}, {
-																id: 'ax2',
-																type: 'linear',
-																position: 'right'
-															}, {
-																id: 'ax3',
-																type: 'linear',
-																position: 'right'//,
-																//ticks: {
-																//	max: 1,
-																//	min: 0
-																//}
-															}
+												var chart = new Chart(document.getElementById("line-chart"), {
+													type: 'line',
+													data: {
+														labels: measures.map(v => v.timestamp),
+														datasets: [{ 
+															data: measures.map(v => v.torque),
+															label: "Torque",
+															borderColor: "#3e95cd",
+															fill: false,
+															yAxisID: 'ax1',
+														}, { 
+															data: measures.map(v => v.speed),
+															label: "Speed",
+															borderColor: "#8e5ea2",
+															fill: false,
+															yAxisID: 'ax2',
+														}, { 
+															data: measures.map(v => v.temperature),
+															label: "Temperature",
+															borderColor: "#3cba9f",
+															fill: false,
+															yAxisID: 'ax3',
+														}
 														]
+													},
+													options: {
+														title: {
+															display: true,
+															text: 'Measures'
+														},
+														scales: {
+															yAxes: 
+															[	{
+																	id: 'ax1',
+																	type: 'linear',
+																	position: 'left',
+																}, {
+																	id: 'ax2',
+																	type: 'linear',
+																	position: 'right'
+																}, {
+																	id: 'ax3',
+																	type: 'linear',
+																	position: 'right'//,
+																	//ticks: {
+																	//	max: 1,
+																	//	min: 0
+																	//}
+																}
+															]
+														}
 													}
-												}
 												});
+												setInterval(function() {
+													// rimozione del punto più vecchio
+													console.log("calling update..");
 
+													// ricezione dei dati aggiornati
+													// creare una nuova richiesta alla ricezione della
+													// quale si va ad eseguire la rimozione dei vecchi
+													// punti e l'inserimento dei nuovi
+
+													// removing one point
+													chart.data.labels.pop();
+													chart.data.datasets.forEach((dataset) => {
+														dataset.data.pop();
+													});
+													chart.update();
+												}, 5000); //5 seconds
 											}
-											else{alert("Errore di chiamata");}
+											else{ alert("Errore di chiamata"); }
 										}			
 									}
 									rq.open("GET", "api/charts", true); // apre la connessione 
 									rq.send();
 								}
-								
-
 								
 							</script>
 						{{else}}
