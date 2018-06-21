@@ -126,13 +126,59 @@
 													// creare una nuova richiesta alla ricezione della
 													// quale si va ad eseguire la rimozione dei vecchi
 													// punti e l'inserimento dei nuovi
+													var updateRequest = createXMLHttpRequest();
 
-													// removing one point
-													chart.data.labels.pop();
-													chart.data.datasets.forEach((dataset) => {
-														dataset.data.pop();
-													});
-													chart.update();
+													updateRequest.onreadystatechange = function(){
+														if (updateRequest.readyState==4){
+															if(updateRequest.status==200){ 
+																console.log("received response..");
+																
+																var newMeasures = JSON.parse(updateRequest.response).reverse();
+															for( i=0; i < newMeasures.length; i++)
+																{
+																	var exists = false;
+																	for (j =0; j < measures.length; j++)
+																	{
+																		if (newMeasures[i].timestamp == measures[j].timestamp)
+																		{
+																			exists = true;
+																			break;
+																		}
+																	}
+																	if (!exists)
+																	{
+																		chart.data.labels.push(newMeasures[i].timestamp);
+																		chart.data.datasets.forEach((dataset) => {
+																			if (dataset.label == "Torque")
+																			{
+																				dataset.data.push(newMeasures[i].torque);
+																			}else if (dataset.label == "Speed")
+																			{
+																				dataset.data.push(newMeasures[i].speed);
+																			}else if (dataset.label == "Temperature")
+																			{
+																				dataset.data.push(newMeasures[i].temperature);
+																			}
+																		});
+																		if (chart.data.labels.length > 30)
+																		{
+																			// removing one point
+																			chart.data.labels.pop();
+																			chart.data.datasets.forEach((dataset) => {
+																				dataset.data.pop();
+																			});
+																		}
+																	}
+																}
+																measures = newMeasures;
+																chart.update();
+														
+															}
+														}
+													}
+
+													updateRequest.open("GET", "api/charts", true); // apre la connessione 
+													updateRequest.send();
 												}, 5000); //5 seconds
 											}
 											else{ alert("Errore di chiamata"); }
