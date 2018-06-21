@@ -42,10 +42,16 @@
 					
 							<p>Charts page:</p>
 							
-							<canvas id="line-chart" ></canvas>
-
+							<div class="wrapper">
+								<canvas id="line-chart" ></canvas>
+							</div>
+							
+							<script src="javascripts/moment.js"></script>
 							<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 							<script>
+		
+								
+
 								function createXMLHttpRequest() {
 									try {return new ActiveXObject("Msxml2.XMLHTTP");} catch (e) {}
 									try {return new ActiveXObject("Microsoft.XMLHTTP");} catch (e) {}
@@ -61,14 +67,23 @@
 											if(rq.status==200){ 
 												
 												var measures = JSON.parse(rq.response).reverse();
-												console.dir(measures);
-
+										
 												// response è un array di 30 valori che
 												// deve poi essere passaro al chart
+
+												// NOTA:											
+												// Utilizzando il tipo time non dovevo riconvertire in stringa i valori
+												// e funzionava bene, ma purtroppo diventava lentissimo il primo caricamento 
+												// del chart. Per questo motivo ho lasciato la scala del tempo
+												// come tipo di dato testo
+												// essendo acquisiti a tempo costante non c'è problema nella rappresentazione
+												// inserendoli come testo infatti equidistanzia i valori sulle x
+												
 												var chart = new Chart(document.getElementById("line-chart"), {
 													type: 'line',
 													data: {
-														labels: measures.map(v => v.timestamp),
+
+														labels: measures.map(v => moment(new Date(v.timestamp)).format("HH:mm:ss")),
 														datasets: [{ 
 															data: measures.map(v => v.torque),
 															label: "Torque",
@@ -96,6 +111,12 @@
 															text: 'Measures'
 														},
 														scales: {
+															
+															/* Ho smesso di usare il tipo time per problemi di lentezza nel caricamento all'avvio
+															xAxes: [{
+																type: 'time'
+															}],
+															*/
 															yAxes: 
 															[	{
 																	id: 'ax1',
@@ -115,6 +136,7 @@
 																	//}
 																}
 															]
+																														
 														}
 													}
 												});
@@ -147,7 +169,17 @@
 																	}
 																	if (!exists)
 																	{
-																		chart.data.labels.push(newMeasures[i].timestamp);
+																		if (chart.data.labels.length >= 30)
+																		{
+																			// removing one point
+																			chart.data.labels.splice(0,1);
+																			chart.data.datasets.forEach((dataset) => {
+																				dataset.data.splice(0,1);
+																			});
+																		}
+
+																		console.log("new measure found.. adding");
+																		chart.data.labels.push(moment(new Date(newMeasures[i].timestamp)).format("HH:mm:ss"));
 																		chart.data.datasets.forEach((dataset) => {
 																			if (dataset.label == "Torque")
 																			{
@@ -160,14 +192,7 @@
 																				dataset.data.push(newMeasures[i].temperature);
 																			}
 																		});
-																		if (chart.data.labels.length > 30)
-																		{
-																			// removing one point
-																			chart.data.labels.pop();
-																			chart.data.datasets.forEach((dataset) => {
-																				dataset.data.pop();
-																			});
-																		}
+
 																	}
 																}
 																measures = newMeasures;
