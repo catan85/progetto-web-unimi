@@ -5,16 +5,26 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 
+// Creazione della connessione del database
+require('./database/connection');
+
+// inizializzazione dei modelli del database
+require('./database/measures');
+require('./database/users');
+
+// definizione dei router
 var authRouter = require('./routes/auth');
 var mainRouter = require('./routes/main');
 var apiRouter = require('./routes/api');
-var passport = require('./model/passport');
 
-// inizializzazione del modello delle misure
-var measures = require('./model/measures');
+
+
+// Inizializzazione di passport per gestire la sicurezza
+var passport = require('./security/passport');
+
+
 
 var app = express();
-
 
 // imposta il path delle view e definisce come motore delle view handlebars
 app.set('views', path.join(__dirname, 'views'));

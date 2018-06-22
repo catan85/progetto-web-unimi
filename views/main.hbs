@@ -1,16 +1,20 @@
 
 <!DOCTYPE HTML>
 <!--
+	IOT METRIC VIEWER - by Andrea Cattaneo M.909227
+
+	TEMPLATE:
 	Astral by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
 	<head>
-		<title>Astral by HTML5 UP</title>
+		<title>IOT-Metric viewer</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="stylesheets/main.css" />
+		<link rel="stylesheet" href="stylesheets/style.css" />
 		<noscript><link rel="stylesheet" href="stylesheets/noscript.css" /></noscript>
 
 	</head>
@@ -45,7 +49,7 @@
 					
 							<p>Charts page:</p>
 							
-							<div class="wrapper">
+							<div class="chart-wrapper">
 								<canvas id="line-chart" ></canvas>
 							</div>
 							
@@ -85,7 +89,7 @@
 												var chart = new Chart(document.getElementById("line-chart"), {
 													type: 'line',
 													data: {
-
+														
 														labels: measures.map(v => moment(new Date(v.timestamp)).format("HH:mm:ss")),
 														datasets: [{ 
 															data: measures.map(v => v.torque),
@@ -109,6 +113,8 @@
 														]
 													},
 													options: {
+														responsive: true,
+														maintainAspectRatio: false,
 														title: {
 															display: true,
 															text: 'Measures'
@@ -159,7 +165,7 @@
 																console.log("received response..");
 																
 																var newMeasures = JSON.parse(updateRequest.response).reverse();
-															for( i=0; i < newMeasures.length; i++)
+																for( i=0; i < newMeasures.length; i++)
 																{
 																	var exists = false;
 																	for (j =0; j < measures.length; j++)
@@ -207,7 +213,7 @@
 
 													updateRequest.open("GET", "api/charts", true); // apre la connessione 
 													updateRequest.send();
-												}, 5000); //5 seconds
+												}, 1000); //1 second refresh
 											}
 											else{ alert("Errore di chiamata"); }
 										}			
@@ -243,7 +249,7 @@
 				<!-- Footer -->
 					<div id="footer">
 						<ul class="copyright">
-							<li>&copy; Untitled.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							<li>&copy; IOT - Metric Viewer.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 						</ul>
 					</div>
 

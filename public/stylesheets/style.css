@@ -1,7 +1,22 @@
-body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
 
-a {
-  color: #00B7FF;
+
+/*
+	Regole aggiunte per gestire la responsività del grafico
+*/
+
+
+@media screen and (max-height: 2000px) {
+	.chart-wrapper {
+		min-height: 500px;
+	}
+}
+@media screen and (max-height: 800px) {
+	.chart-wrapper {
+		min-height: 300px;
+	}
+}
+@media screen and (max-height: 500px) {
+.chart-wrapper {
+	min-height: 200px;
+	}
 }
