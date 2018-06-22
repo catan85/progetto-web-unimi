@@ -42,7 +42,7 @@
 					
 							<p>Charts page:</p>
 							
-							<div class="wrapper">
+							<div class="chart-wrapper">
 								<canvas id="line-chart" ></canvas>
 							</div>
 							
@@ -82,7 +82,7 @@
 												var chart = new Chart(document.getElementById("line-chart"), {
 													type: 'line',
 													data: {
-
+														
 														labels: measures.map(v => moment(new Date(v.timestamp)).format("HH:mm:ss")),
 														datasets: [{ 
 															data: measures.map(v => v.torque),
@@ -106,6 +106,8 @@
 														]
 													},
 													options: {
+														responsive: true,
+														maintainAspectRatio: false,
 														title: {
 															display: true,
 															text: 'Measures'
