@@ -162,7 +162,7 @@
 																console.log("received response..");
 																
 																var newMeasures = JSON.parse(updateRequest.response).reverse();
-															for( i=0; i < newMeasures.length; i++)
+																for( i=0; i < newMeasures.length; i++)
 																{
 																	var exists = false;
 																	for (j =0; j < measures.length; j++)
@@ -210,7 +210,7 @@
 
 													updateRequest.open("GET", "api/charts", true); // apre la connessione 
 													updateRequest.send();
-												}, 5000); //5 seconds
+												}, 1000); //1 second refresh
 											}
 											else{ alert("Errore di chiamata"); }
 										}			
