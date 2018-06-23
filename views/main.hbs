@@ -57,8 +57,6 @@
 							<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 							<script>
 		
-								
-
 								function createXMLHttpRequest() {
 									try {return new ActiveXObject("Msxml2.XMLHTTP");} catch (e) {}
 									try {return new ActiveXObject("Microsoft.XMLHTTP");} catch (e) {}
@@ -229,7 +227,7 @@
 
 					</article>
 
-					  <article id="login" class="panel">
+					  <article id="login" class="panel login-form">
 						    <form action="/login" method="post">
 								<div>
 								<label>Username:</label>
@@ -239,7 +237,34 @@
 								<label>Password:</label>
 								<input type="password" name="password"/>
 								</div>
+						
+								<div class="submit-button-wrapper">
+									<input type="submit" value="Submit" />
+								</div>
+								<div class="register-button-wrapper">
+									<a href="#register" class="button register-button" >Register</a>
+								</div>
+							
+
+
+							</form>
+					  </article>
+
+					<article id="register" class="panel">
+						    <form action="/register" method="post">
 								<div>
+								<label>Username:</label>
+								<input type="text" name="username"/><br/>
+								</div>
+								<div>
+								<label>Password:</label>
+								<input type="password" name="password"/>
+								</div>
+								<div>
+								<div>
+								<label>Email:</label>
+								<intput type="email" name="email"/>
+								</div>
 								<input type="submit" value="Submit"/>
 								</div>
 							</form>

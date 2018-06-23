@@ -20,3 +20,32 @@
 	min-height: 250px;
 	}
 }
+
+.login-form{
+	display: inline-block;
+
+}
+
+.register-button-wrapper{
+	margin-top: 5px;
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+	display: inline-block;
+}
+
+.register-button{
+	text-decoration-line: none;
+}
+
+.submit-button-wrapper{
+	margin-top: 5px;
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+
+	display: inline-block;
+}
+
