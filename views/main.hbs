@@ -36,11 +36,15 @@
 					<div id="main">
 					<article id="home" class="panel intro">
 					   <header>
+						   	{{#if authMessage}}
+							<p>{{authMessage}}</p>
+							{{/if}}
 							{{#if user}}
 								<p>Hello, {{user.username}}!</p>
 							{{else}}
-								<p>Welcome! Please <a href="#login">log in</a>.</p>
+								<p>Please <a href="#login">log in</a>.</p>
 							{{/if}}
+
 					   </header>
 					</article>
 					
@@ -261,11 +265,16 @@
 								<input type="password" name="password"/>
 								</div>
 								<div>
+
 								<div>
 								<label>Email:</label>
-								<intput type="email" name="email"/>
+								<input type="email" name="email"/>
 								</div>
+								
+								<div>
 								<input type="submit" value="Submit"/>
+								</div>
+								
 								</div>
 							</form>
 					  </article>
