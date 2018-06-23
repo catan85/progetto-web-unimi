@@ -8,7 +8,9 @@ var mongoose = require('mongoose');
 passport.use(new Strategy(
   function(username, password, cb) {
 
+    // lettura del database utenti
     readUsersDb(function(){
+      // ricerca dell'utente in base allo username
       findByUsername(username, function(err, user) {
         if (err) { return cb(err); }
         if (!user) { 
@@ -38,9 +40,8 @@ passport.use(new Strategy(
 
   module.exports = passport;
 
-  // Di seguito vengono invece riportate le funzioni di verifica degli utenti vere e proprie
-  // andranno poi sostituite da una verifica su db
 
+  // records contiene gli utenti letti dal database
   var records = [];
 
   // preleva da mongoose il modello riferito allo schema che abbiamo definito
@@ -64,12 +65,14 @@ passport.use(new Strategy(
   findById = function(id, cb) {
     process.nextTick(function() {
       
-      var idx = id - 1;
-      if (records[idx]) {
-        cb(null, records[idx]);
-      } else {
-        cb(new Error('User ' + id + ' does not exist'));
+      for (i = 0; i < records.length; i++)
+      {
+        if (records[i].id == id)
+        {
+          return cb(null, records[i]);
+        }
       }
+      return cb(new Error('User ' + id + ' does not exist'));
     });
   }
 
