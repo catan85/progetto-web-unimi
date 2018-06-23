@@ -13,7 +13,6 @@ router.get('/charts',
     Measures.find({'username': req.user.username}).sort({'timestamp': -1}).limit(30).exec(function(err,data){
       res.json(data);
     });
-  
   });
 
 module.exports = router;
