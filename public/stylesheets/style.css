@@ -7,16 +7,16 @@
 
 @media screen and (max-height: 2000px) {
 	.chart-wrapper {
-		min-height: 500px;
+		min-height: 40vh;
 	}
 }
 @media screen and (max-height: 800px) {
 	.chart-wrapper {
-		min-height: 300px;
+		min-height: 50vh;
 	}
 }
-@media screen and (max-height: 500px) {
+@media screen and (max-height: 300px) {
 .chart-wrapper {
-	min-height: 200px;
+	min-height: 250px;
 	}
 }
