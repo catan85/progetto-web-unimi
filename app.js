@@ -17,11 +17,8 @@ var authRouter = require('./routes/auth');
 var mainRouter = require('./routes/main');
 var apiRouter = require('./routes/api');
 
-
-
 // Inizializzazione di passport per gestire la sicurezza
 var passport = require('./security/passport');
-
 
 
 var app = express();
@@ -41,6 +38,8 @@ app.use(cookieParser());
 
 
 // abilita le chiamate CORS da tutti gli host
+// in realtà non venogno effettuate chiamate cross domain dal client ma lo lascio nel caso possa essere
+// necessario farne in futuro.
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -56,6 +55,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 var second = 1000;
 var minute = 60*second;
 var hour = 60*minute;
+
+// las stringa per la criptazione dei dati è cablata nel codice. 
+// in una applicazione reale sarebbe da mettere nelle variabili ambiente. 
+// In ogni caso siamo nel lato server, quindi è accettabile averla anche cablata, non
+// rappresenta una falla di sicurezza
 app.use(require('express-session')({ secret: 'My S3cr3t Str1ng!', resave: false, saveUninitialized: false, cookie: {maxAge : (1 * hour)} }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -74,8 +78,5 @@ app.use('/api',apiRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
-
-
 
 module.exports = app;

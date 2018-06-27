@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 
 // Metodo POST per il login (lanciato dal form della pagina login)
 router.post('/login', 
-  passport.authenticate('local', { failureRedirect: '/login'}),
+  passport.authenticate('local', { failureRedirect: '/'}),
   function(req, res) {
     res.redirect('/');
   });
@@ -14,7 +14,6 @@ router.post('/login',
 router.post('/register', function(req, res) {
     var username = req.body.username;
     var password = req.body.password;
-    var email = req.body.email;
 
     // preleva da mongoose il modello riferito allo schema che abbiamo definito
     var Users = mongoose.model('users');

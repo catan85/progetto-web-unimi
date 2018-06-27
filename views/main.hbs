@@ -36,9 +36,6 @@
 					<div id="main">
 					<article id="home" class="panel intro">
 					   <header>
-						   	{{#if authMessage}}
-							<p>{{authMessage}}</p>
-							{{/if}}
 							{{#if user}}
 								<p>Hello, {{user.username}}!</p>
 							{{else}}
@@ -213,15 +210,15 @@
 														}
 													}
 
-													updateRequest.open("GET", "api/charts", true); // apre la connessione 
+													updateRequest.open("GET", "api/charts", true); // apre la connessione  (true=async)
 													updateRequest.send();
 												}, 1000); //1 second refresh
 											}
 											else{ alert("Errore di chiamata"); }
 										}			
 									}
-									rq.open("GET", "api/charts", true); // apre la connessione 
-									rq.send();
+										rq.open("GET", "api/charts", true); // apre la connessione (true=async)
+										rq.send();	
 								}
 								
 							</script>
@@ -248,14 +245,11 @@
 								<div class="register-button-wrapper">
 									<a href="#register" class="button register-button" >Register</a>
 								</div>
-							
-
-
 							</form>
 					  </article>
 
 					<article id="register" class="panel">
-						    <form action="/register" method="post">
+						    <form action="/register" method="post">	
 								<div>
 								<label>Username:</label>
 								<input type="text" name="username"/><br/>
@@ -265,16 +259,10 @@
 								<input type="password" name="password"/>
 								</div>
 								<div>
-
-								<div>
-								<label>Email:</label>
-								<input type="email" name="email"/>
-								</div>
-								
 								<div>
 								<input type="submit" value="Submit"/>
 								</div>
-								
+							
 								</div>
 							</form>
 					  </article>
@@ -286,9 +274,7 @@
 							<li>&copy; IOT - Metric Viewer.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 						</ul>
 					</div>
-
 			</div>
-
 
 
 		<!-- Scripts -->

@@ -1,5 +1,4 @@
 
-
 /*
 	Regole aggiunte per gestire la responsività del grafico
 */
@@ -7,12 +6,12 @@
 
 @media screen and (max-height: 2000px) {
 	.chart-wrapper {
-		min-height: 40vh;
+		min-height: 40vh; /* 40% della viewport height*/
 	}
 }
 @media screen and (max-height: 800px) {
 	.chart-wrapper {
-		min-height: 50vh;
+		min-height: 50vh; /* 50% della viewport height*/
 	}
 }
 @media screen and (max-height: 300px) {
@@ -23,7 +22,6 @@
 
 .login-form{
 	display: inline-block;
-
 }
 
 .register-button-wrapper{
@@ -49,3 +47,4 @@
 	display: inline-block;
 }
 
+	
