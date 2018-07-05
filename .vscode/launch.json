@@ -10,7 +10,7 @@
         }
     ],
     "configurations": [
-
+        
         {
             "type": "node",
             "request": "launch",
